@@ -4,18 +4,21 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 
+import rootReducer from './reducers';
 
 import HomePageController from './containers/HomePage/HomePageController';
 
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 function App() {
   return (
-    <div className="App">
+    <Provider store={store}>
       <BrowserRouter>
         <Switch>
           <Route path='/' exact component={HomePageController} />
         </Switch>
       </BrowserRouter>
-    </div>
+    </Provider>
   );
 }
 

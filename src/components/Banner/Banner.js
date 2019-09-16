@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
-import SignUp from '../Auth/Signup'
-import LogIn from '../Auth/LogIn'
+import SignUp from '../../containers/Auth/SignupController'
+import LogIn from '../../containers/Auth/LogInController'
 
 import '../../styles/banner.scss'
 
