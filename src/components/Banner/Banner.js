@@ -1,5 +1,7 @@
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
+import SignUp from '../Auth/Signup'
+import LogIn from '../Auth/LogIn'
 
 import '../../styles/banner.scss'
 
@@ -17,10 +19,8 @@ const Banner = ({isLoggedIn}) => {
         </Navbar.Collapse>  :
           <Navbar.Collapse className="justify-content-end">
           <Nav>
-            <Nav.Link href="#deets">Sign up</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Log in
-            </Nav.Link>
+            <SignUp />
+            <LogIn />
           </Nav>
         </Navbar.Collapse>
       }
