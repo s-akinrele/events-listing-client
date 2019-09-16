@@ -1,0 +1,20 @@
+@import './colors';
+
+.home-page-controller {
+  background-image: url(../images/bg-home.jpg);
+  height: 50vh;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+
+  .bg-overlay {
+    background-color: $bg-overlay;
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}

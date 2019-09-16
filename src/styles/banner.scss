@@ -1,0 +1,10 @@
+@import './colors';
+
+.banner {
+  .navbar-brand {
+    color: $primary-color;
+  }
+  .navbar-light .navbar-nav .nav-link {
+    color: $white;
+  }
+}
