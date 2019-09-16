@@ -1,6 +1,6 @@
 import jwt from 'jwt-decode'
 
-export const token = () => localStorage.getItem('auth_token');
+export const token = () => localStorage.getItem('authToken');
 
 export const isLoggedIn = () => token() !== null
 

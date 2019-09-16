@@ -34,10 +34,6 @@ class SignUpController extends Component {
 
   onSumbit = () => {
     this.props.signupUser({...this.state.user})
-
-    // if (this.props.user.user.error) {
-    //   this.handleClose()
-    // }
   }
 
   render() {
