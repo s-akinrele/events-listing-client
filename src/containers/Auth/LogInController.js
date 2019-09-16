@@ -17,6 +17,15 @@ class LogInController extends Component {
     }
   }
 
+  static getDerivedStateFromProps(nextProps) {
+    const {user, loading} = nextProps.user
+
+    if (!loading && Object.entries(user).length)
+      return {showModal: false}
+
+    return null
+  }
+
   handleClose = () => this.setState({showModal: false});
 
   handleShow = () => this.setState({showModal: true});
@@ -32,14 +41,10 @@ class LogInController extends Component {
 
   onSumbit = () => {
     this.props.loginUser({...this.state.user})
-
-    // if (this.props.user.user.error) {
-    //   this.handleClose()
-    // }
   }
 
   render() {
-    // console.log(this.props.user)
+     const {errorMessage} = this.props.user
     return (
       <>
         <Nav.Link onClick={this.handleShow} >Log in</Nav.Link>
@@ -66,6 +71,7 @@ class LogInController extends Component {
                 </Form.Control.Feedback>
               </Form.Group>
             </Form>
+            {errorMessage && <span>{errorMessage}</span>}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>

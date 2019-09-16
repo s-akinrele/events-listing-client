@@ -41,7 +41,6 @@ class SignUpController extends Component {
   }
 
   render() {
-    console.log(this.state.user)
     return (
       <>
         <Nav.Link onClick={this.handleShow} >Sign Up</Nav.Link>
