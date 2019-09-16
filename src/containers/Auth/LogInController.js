@@ -12,7 +12,8 @@ class LogInController extends Component {
       user: {
         email: '',
         password: ''
-      }
+      },
+      validated: false
     }
   }
 
@@ -21,17 +22,24 @@ class LogInController extends Component {
   handleShow = () => this.setState({showModal: true});
 
   handleChange = (event) => {
+    const form = event.currentTarget;
     const field = event.target.name;
     const user = this.state.user;
     user[field] = event.target.value
-    this.setState({user})
+    form.checkValidity() 
+    this.setState({user, validated: true})
   }
 
   onSumbit = () => {
     this.props.loginUser({...this.state.user})
+
+    // if (this.props.user.user.error) {
+    //   this.handleClose()
+    // }
   }
 
   render() {
+    // console.log(this.props.user)
     return (
       <>
         <Nav.Link onClick={this.handleShow} >Log in</Nav.Link>
@@ -41,18 +49,21 @@ class LogInController extends Component {
             <Modal.Title>Log In</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form noValidate validated={this.state.validated}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" name="email" placeholder="Enter email" onChange={this.handleChange} />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
+                <Form.Control required type="email" name="email" placeholder="Enter email" onChange={this.handleChange} />
+                <Form.Control.Feedback type="invalid">
+                  Please enter a valid email address
+                </Form.Control.Feedback>
               </Form.Group>
   
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" name="password" placeholder="Password" onChange={this.handleChange} />
+                <Form.Control required type="password" name="password" placeholder="Password" onChange={this.handleChange} />
+                <Form.Control.Feedback type="invalid">
+                  Please enter your password.
+                </Form.Control.Feedback>
               </Form.Group>
             </Form>
           </Modal.Body>

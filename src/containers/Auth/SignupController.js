@@ -1,18 +1,47 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import {Button, Modal, Nav, Form} from 'react-bootstrap'
+import {signupUser} from '../../requests/userRequest';
 
 class SignUpController extends Component {
   constructor() {
     super()
 
     this.state = {
-      showModal: false
+      showModal: false,
+      user: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
+      }
     }
   }
 
   handleClose = () => this.setState({showModal: false});
+
   handleShow = () => this.setState({showModal: true})
+
+  handleChange = (event) => {
+    const form = event.currentTarget;
+    const field = event.target.name;
+    const user = this.state.user;
+    user[field] = event.target.value
+    form.checkValidity() 
+    this.setState({user, validated: true})
+  }
+
+  onSumbit = () => {
+    this.props.signupUser({...this.state.user})
+
+    // if (this.props.user.user.error) {
+    //   this.handleClose()
+    // }
+  }
+
   render() {
+    console.log(this.state.user)
     return (
       <>
         <Nav.Link onClick={this.handleShow} >Sign Up</Nav.Link>
@@ -22,18 +51,65 @@ class SignUpController extends Component {
             <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form noValidate validated={this.state.validated}>
+              <Form.Group controlId="validationFirstName">
+                <Form.Label>First name</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="first_name"
+                  placeholder="First name"
+                  onChange={this.handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group controlId="validationLastName">
+                <Form.Label>Last name</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="last_name"
+                  placeholder="Last name"
+                  onChange={this.handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" name="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
+                <Form.Control
+                  required
+                  type="email"
+                  name="email"
+                  placeholder="Enter email"
+                  onChange={this.handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
   
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" name="password" placeholder="Password" />
+                <Form.Control
+                  required
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group controlId="formBasicPasswordConfirmation">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  required
+                  type="password"
+                  name="password_confirmation"
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Form>
           </Modal.Body>
@@ -41,7 +117,7 @@ class SignUpController extends Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Cancel
             </Button>
-            <Button className="log-in-cta" onClick={this.handleClose}>
+            <Button className="log-in-cta" onClick={this.onSumbit}>
               Sign Up
             </Button>
           </Modal.Footer>
@@ -51,5 +127,7 @@ class SignUpController extends Component {
   }
 }
 
-export default SignUpController;
+const mapStateToProps = ({user}) => ({user})
+
+export default connect(mapStateToProps, {signupUser})(SignUpController);
 
