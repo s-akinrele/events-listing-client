@@ -1,17 +1,15 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import Banner from '../../components/Banner/Banner'
+import Header from '../../components/Header';
+import EventsJumbotron from '../../components/Jumbotron';
+import EventsLisiting from '../../components/EventsListing';
 
-import {signOut} from '../../requests/userRequest'
+import { signOut } from '../../requests/userRequest'
 
 import '../../styles/homePageController.scss'
 
 class HomePageController extends Component {
-  constructor() {
-    super()
-  }
-
   onSignOut = () => {
     this.props.signOut()
     this.props.history.push('/');
@@ -19,12 +17,13 @@ class HomePageController extends Component {
 
   render() {
     return (
-      <div className='home-page-controller'>
-        <div className='bg-overlay'/>
-        <Banner onSignOut={this.onSignOut} />
+      <div>
+        <Header onSignOut={this.onSignOut} />
+        <EventsJumbotron title="The real world is calling" subtitle="Join a local group to meet people, try something new, or do more of what you love." />
+        <EventsLisiting />
       </div>
     )
   }
 }
 
-export default connect(null, {signOut})(HomePageController)
+export default connect(null, { signOut })(HomePageController)
