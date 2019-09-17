@@ -1,0 +1,43 @@
+.events-card-wrapper {
+  &:hover {
+    text-decoration: none
+  }
+  .events-card {
+    margin: 1rem 0;
+    width: 20rem;
+  
+    .events-date {
+      color: #00a2c7;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  
+    .card-title {
+      color: black;
+      font-weight: bold;
+    }
+  
+    .card-text {
+      color: grey;
+    }
+  }
+  .number-of-attendes {
+    font-size: 14px;
+    color: grey;
+    font-weight: bold;
+  }
+
+  .attend-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      justify-content: flex-end;
+      background-color: transparent;
+      color: #00a2c7;
+      border: 1px solid  #00a2c7;
+    }
+  }
+}
+
