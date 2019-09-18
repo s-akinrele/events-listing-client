@@ -109,7 +109,7 @@ class SignUpController extends Component {
             </Button>
           <Button className="log-in-cta" onClick={this.onSumbit}>
             Sign Up
-            </Button>
+          </Button>
         </Modal.Footer>
       </Modal>
     );

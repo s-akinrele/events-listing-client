@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../styles/_events-cards.scss';
 
