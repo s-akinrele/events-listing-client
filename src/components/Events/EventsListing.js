@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import '../../styles/_events-cards.scss';
 
-const EventsLisiting = ({events}) => {
+const EventsLisiting = ({events = []}) => {
     return (
       <Container>
         <Row>
@@ -13,15 +14,13 @@ const EventsLisiting = ({events}) => {
           </div>
         </Row>
         <Row>
-        {
-          events.length && events.map((event, index) => {
-            console.log(event, 'event')
+        { events.map((event, index) => {
             return (
                 <Col key={index}>
                   <Link className="events-card-wrapper" to={`/events/${event.id}`}>
                     <Card className="events-card">
                       <Card.Body>
-                        <p className="events-date">THU, SEP 19, 11:00AM</p>
+                        <p className="events-date">{moment(event.start_date).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
                         <Card.Title>{event.name}</Card.Title>
                         <Card.Text>
                           {event.description}
@@ -36,9 +35,9 @@ const EventsLisiting = ({events}) => {
                     </Card>
                   </Link>
                 </Col>
-            )
-          })
-        }
+              )
+            })
+          }
         </Row>
 
       </Container>
