@@ -10,7 +10,7 @@ export const createEvent = event => dispatch => {
 
   axios.post(eventsConstant.CREATE_EVENT, event, {headers: {Authorization: token()}})
     .then(response => {
-      if (response.status === 200) {
+      if (response.status === 201) {
         dispatch(asyncActions(CREATE_EVENT).success(response.data))
         dispatch(asyncActions(CREATE_EVENT).loading(false))
       }

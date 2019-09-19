@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
+import {createLogger} from 'redux-logger';
 
 import rootReducer from './reducers';
 
@@ -12,7 +13,7 @@ import CreateEventController from './containers/Event/CreateEventController';
 import ViewEventController from './containers/Event/ViewEventController';
 import EventsPage from './containers/Event/Index';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
 function App() {
   return (

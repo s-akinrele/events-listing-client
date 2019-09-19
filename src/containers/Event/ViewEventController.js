@@ -23,7 +23,6 @@ class EventsPage extends Component {
   }
 
   render() {
-    console.log(this.props, 'props')
     const {name, start_date, image_url, description} = this.props.event
     return (
       <div>
@@ -33,7 +32,11 @@ class EventsPage extends Component {
           title={name}
           imageUrl={image_url}
         />
-        <EventDetails description={description}/>
+        <EventDetails
+          description={description}
+          startDate={moment(start_date).format("ddd, MMM Do YYYY")}
+          title={name}
+        />
         <EventsLisiting />
       </div>
     )

@@ -23,9 +23,6 @@ const eventReducer = (state=initialState, action) => {
     case asyncActionName(VIEW_EVENT).loading:
       return {...state, loading: action.payload}
 
-    // case SIGN_OUT:
-    //   return {...initialState}
-
     default:
       return state
   }

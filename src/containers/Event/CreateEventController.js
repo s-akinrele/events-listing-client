@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Row, Button } from 'react-bootstrap';
-import { Form } from 'react-bootstrap'
+import { Container, Row, Button , Form, Alert} from 'react-bootstrap';
+import classnames from 'classnames'
 
 import Datetime from "react-datetime"
 import "react-datetime/css/react-datetime.css";
@@ -10,6 +10,8 @@ import Header from '../../components/Header';
 import ImageUploader from '../../components/Images/ImageUpload';
 import {signOut} from '../../requests/userRequest';
 import {createEvent} from '../../requests/eventRequest';
+import loader from '../../images/loader.gif';
+
 
 import '../../styles/_events-form.scss';
 
@@ -26,6 +28,12 @@ class CreateEventController extends Component {
     }
 
     this._handleImageChange = this._handleImageChange.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (Object.entries(prevProps.event.event).length !== Object.entries(this.props.event.event).length) {
+      return this.props.history.push(`/events/${this.props.event.event.id}`);
+    }
   }
 
   handleStartDateChange = date => {
@@ -68,11 +76,14 @@ class CreateEventController extends Component {
 
 
   render() {
+    const {errorMessage, loading} = this.props.event
+    let buttonText = loading ? <img src={loader} alt="loading..." /> : 'Create Event';
     return (
       <div>
         <Header onSignOut={this.onSignOut} />
         <div className="create-event-controller">
           <Container>
+            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
             <Row>
               <Form>
                 <Form.Group controlId="eventName">
@@ -97,8 +108,8 @@ class CreateEventController extends Component {
                   imagePreviewUrl={this.state.file.src}
                 />
               </Form>
-              <Button className="create-event-cta" onClick={this.onSumbit}>
-                Create Event
+              <Button className={classnames("create-event-cta", {"disabled": loading})} onClick={this.onSumbit}>
+                {buttonText}
               </Button>
             </Row>
           </Container>
@@ -109,5 +120,5 @@ class CreateEventController extends Component {
   }
 }
 
-const mapStateToProps = ({ event }) => ({...event})
+const mapStateToProps = ({ event }) => ({event})
 export default connect(mapStateToProps, { signOut, createEvent })(CreateEventController)

@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import '../../styles/_events-cards.scss';
 
-const EventDetails = ({description}) => {
+const EventDetails = ({description, startDate, title}) => {
   return (
     <div>
       <Container>
@@ -17,11 +17,10 @@ const EventDetails = ({description}) => {
           <Col xs={6} md={4}>
             <Card className="events-card" style={{ margin: "3rem 0"}}>
               <Card.Body>
-                <p className="events-date">THU, SEP 19, 11:00AM</p>
-                <Card.Title>Social Liga</Card.Title>
+                <p className="events-date">{startDate}</p>
+                <Card.Title>{title}</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up the bulk of
-                  the card's content.
+                  Find it interesting? Please click the Attend button to register for this event
                   </Card.Text>
                 <Card.Link href="#">
                   <div className="attend-button">
