@@ -1,0 +1,22 @@
+@import  './colors';
+
+.event-jumbotron {
+  height: 400px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-size: cover;
+  background-position: center;
+  color: $white;
+
+  .bg-overlay {
+    background-color: $bg-overlay;
+    opacity: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+}
