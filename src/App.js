@@ -22,7 +22,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={HomePageController} />
           <PrivateRoute path='/create-event' component={CreateEventController} />
-          <PrivateRoute path="/events/:id" component={ViewEventController} />
+          <Route path="/events/:id" component={ViewEventController} />
           <Route path="/all-events" component={EventsPage} />
         </Switch>
       </BrowserRouter>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import '../../styles/_events-cards.scss';
+import {isLoggedIn} from '../../helpers/AuthHelper'
 
-const EventDetails = ({description, startDate, title}) => {
+const EventDetails = ({description, startDate, title, user}) => {
   return (
     <div>
       <Container>
@@ -24,7 +25,10 @@ const EventDetails = ({description, startDate, title}) => {
                   </Card.Text>
                 <Card.Link href="#">
                   <div className="attend-button">
-                    <Button>Attend</Button>
+                    {(isLoggedIn() || Object.entries(user).length) ?
+                      <Button>Attend</Button> :
+                      <div>Please signup or login in to register for this event</div>
+                    }
                   </div>
                 </Card.Link>
               </Card.Body>

@@ -35,6 +35,7 @@ class EventsPage extends Component {
           description={description}
           startDate={moment(start_date).format("ddd, MMM Do YYYY")}
           title={name}
+          user={this.props.user}
         />
       </div>
     )
@@ -42,6 +43,6 @@ class EventsPage extends Component {
 }
 
 
-const mapStateToProps = ({ event }) => ({ ...event })
+const mapStateToProps = ({ event, user }) => ({ ...event, ...user })
 
 export default connect(mapStateToProps, { signOut, viewEvent })(EventsPage)
