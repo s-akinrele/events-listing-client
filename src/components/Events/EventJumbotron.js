@@ -15,7 +15,6 @@ const EventJumbotron = ({ title, subtitle, imageUrl }) => {
             <p>
             {subtitle}
           </p>
-          <Button variant="primary">Join Meetup</Button>
           </div>
         </Container>
       </Jumbotron>

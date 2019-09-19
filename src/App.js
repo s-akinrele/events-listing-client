@@ -20,10 +20,9 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route path='/' exact component={HomePageController} />
+          <Route path='/' exact component={EventsPage} />
           <PrivateRoute path='/create-event' component={CreateEventController} />
           <Route path="/events/:id" component={ViewEventController} />
-          <Route path="/all-events" component={EventsPage} />
         </Switch>
       </BrowserRouter>
     </Provider>

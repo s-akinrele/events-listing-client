@@ -25,9 +25,8 @@ class EventsPage extends Component {
     return (
       <div>
         <Header onSignOut={this.onSignOut} />
-        <EventsJumbotron subtitle="Take a look at events and find the one that you find interesting" title="View All Events" />
+        <EventsJumbotron title="The real world is calling" subtitle="Join a local group to meet people, try something new, or do more of what you love." />
         <EventsLisiting events={events} />
-
       </div>
     )
   }

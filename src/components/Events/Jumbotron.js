@@ -16,8 +16,8 @@ const EventsJumbotron = ({ title, subtitle }) => {
             <p>
             {subtitle}
           </p>
-          <Link to="/all-events">
-            <Button variant="primary">View Events</Button>
+          <Link to="/create-event">
+            <Button variant="primary">Create An Event</Button>
           </Link>
           </div>
         </Container>

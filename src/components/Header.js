@@ -74,7 +74,7 @@ class Header extends Component {
                     </Dropdown.Toggle>
                       <Dropdown.Menu>
                         <Dropdown.Item href="/create-event">Create Event</Dropdown.Item>
-                        <Dropdown.Item href="/all-events">View All Events</Dropdown.Item>
+                        <Dropdown.Item href="/">View All Events</Dropdown.Item>
                         <Dropdown.Item onClick={onSignOut}>Log out</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
