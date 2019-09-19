@@ -4,7 +4,6 @@ import moment from 'moment'
 
 import Header from '../../components/Header';
 import EventJumbotron from '../../components/Events/EventJumbotron';
-import EventsLisiting from '../../components/Events/EventsListing';
 import EventDetails from '../../components/Events/EventDetails';
 
 import { signOut } from '../../requests/userRequest'
@@ -37,7 +36,6 @@ class EventsPage extends Component {
           startDate={moment(start_date).format("ddd, MMM Do YYYY")}
           title={name}
         />
-        <EventsLisiting />
       </div>
     )
   }

@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../styles/_events-cards.scss';
 
-const EventsLisiting = ({eventId, startDate, description, viewEvent, name}) => {
+const EventsLisiting = ({events}) => {
     return (
       <Container>
         <Row>
@@ -13,27 +13,34 @@ const EventsLisiting = ({eventId, startDate, description, viewEvent, name}) => {
           </div>
         </Row>
         <Row>
-          <Col>
-            <Link className="events-card-wrapper" to={`/events/${eventId}`}>
-              <Card className="events-card">
-                <Card.Body>
-                  <p className="events-date">THU, SEP 19, 11:00AM</p>
-                  <Card.Title>Frontend Masters</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                  </Card.Text>
-                  <Card.Link href="#">
-                    <div className="attend-button">
-                      <p className="number-of-attendes">500 attendes</p>
-                      <Button onClick={viewEvent}>View More</Button>
-                    </div>
-                  </Card.Link>
-                </Card.Body>
-              </Card>
-            </Link>
-          </Col>
+        {
+          events.length && events.map((event, index) => {
+            console.log(event, 'event')
+            return (
+                <Col key={index}>
+                  <Link className="events-card-wrapper" to={`/events/${event.id}`}>
+                    <Card className="events-card">
+                      <Card.Body>
+                        <p className="events-date">THU, SEP 19, 11:00AM</p>
+                        <Card.Title>{event.name}</Card.Title>
+                        <Card.Text>
+                          {event.description}
+                        </Card.Text>
+                        <Card.Link href="#">
+                          <div className="attend-button">
+                            <p className="number-of-attendes">500 attendes</p>
+                            <Button >View More</Button>
+                          </div>
+                        </Card.Link>
+                      </Card.Body>
+                    </Card>
+                  </Link>
+                </Col>
+            )
+          })
+        }
         </Row>
+
       </Container>
     )
 }

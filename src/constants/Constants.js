@@ -6,7 +6,8 @@ export const authConstants = {
 }
 
 export const eventsConstant = {
-  CREATE_EVENT: `${BASE_URL}/events`
+  CREATE_EVENT: `${BASE_URL}/events`,
+  VIEW_ALL_EVENTS: `${BASE_URL}/events`
 }
 
 export const viewEventConstant = id => ({VIEW_EVENT: `${BASE_URL}/events/${id}`})
