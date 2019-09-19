@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Container, Button } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
 import '../../styles/_jumbotron.scss';
@@ -15,7 +16,9 @@ const EventsJumbotron = ({ title, subtitle }) => {
             <p>
             {subtitle}
           </p>
-          <Button variant="primary">Join Meetup</Button>
+          <Link to="/all-events">
+            <Button variant="primary">View Events</Button>
+          </Link>
           </div>
         </Container>
       </Jumbotron>

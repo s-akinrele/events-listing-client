@@ -11,7 +11,7 @@ import PrivateRoute from './components/Auth/PrivateRoute'
 import HomePageController from './containers/HomePage/HomePageController';
 import CreateEventController from './containers/Event/CreateEventController';
 import ViewEventController from './containers/Event/ViewEventController';
-import EventsPage from './containers/Event/Index';
+import EventsPage from './containers/Event/EventsPage';
 
 const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
@@ -21,9 +21,9 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path='/' exact component={HomePageController} />
-          <Route path="/event" component={EventsPage} />
           <PrivateRoute path='/create-event' component={CreateEventController} />
           <PrivateRoute path="/events/:id" component={ViewEventController} />
+          <Route path="/all-events" component={EventsPage} />
         </Switch>
       </BrowserRouter>
     </Provider>

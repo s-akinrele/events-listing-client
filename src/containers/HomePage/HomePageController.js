@@ -10,6 +10,14 @@ import { signOut } from '../../requests/userRequest'
 import '../../styles/homePageController.scss'
 
 class HomePageController extends Component {
+  constructor() {
+    super()
+  }
+
+  componentDidMount() {
+
+  }
+
   onSignOut = () => {
     this.props.signOut()
     this.props.history.push('/');
