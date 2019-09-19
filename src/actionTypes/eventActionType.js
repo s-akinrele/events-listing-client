@@ -1,3 +1,4 @@
 export const CREATE_EVENT = 'CREATE_EVENT'
 export const VIEW_EVENT = 'VIEW_EVENT'
 export const VIEW_ALL_EVENTS = 'VIEW_ALL_EVENTS'
+export const REGISTER_EVENT = 'REGISTER_EVENT'

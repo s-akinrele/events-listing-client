@@ -7,7 +7,8 @@ import EventJumbotron from '../../components/Events/EventJumbotron';
 import EventDetails from '../../components/Events/EventDetails';
 
 import { signOut } from '../../requests/userRequest'
-import {viewEvent} from '../../requests/eventRequest'
+import {viewEvent, registerForEvent} from '../../requests/eventRequest'
+import {currentUser} from '../../helpers/AuthHelper'
 
 import '../../styles/homePageController.scss'
 
@@ -21,8 +22,19 @@ class EventsPage extends Component {
     this.props.viewEvent(this.props.match.params.id)
   }
 
+  registerEvent = () => {
+    const {event} = this.props
+    const {user} = this.props.user
+    const data = {
+      event_id: event.id,
+      user_id: currentUser(user).id
+    }
+    this.props.registerForEvent(data)
+  }
+
   render() {
     const {name, start_date, image_url, description} = this.props.event
+    const {user} = this.props.user
     return (
       <div>
         <Header onSignOut={this.onSignOut} />
@@ -35,7 +47,8 @@ class EventsPage extends Component {
           description={description}
           startDate={moment(start_date).format("ddd, MMM Do YYYY")}
           title={name}
-          user={this.props.user}
+          user={user}
+          registerEvent={this.registerEvent}
         />
       </div>
     )
@@ -43,6 +56,6 @@ class EventsPage extends Component {
 }
 
 
-const mapStateToProps = ({ event, user }) => ({ ...event, ...user })
+const mapStateToProps = ({ event, user }) => ({ ...event, user })
 
-export default connect(mapStateToProps, { signOut, viewEvent })(EventsPage)
+export default connect(mapStateToProps, { signOut, viewEvent, registerForEvent })(EventsPage)

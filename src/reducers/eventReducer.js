@@ -1,5 +1,5 @@
 import {asyncActionName} from '../utils/asynUtil'
-import {CREATE_EVENT, VIEW_EVENT, VIEW_ALL_EVENTS} from '../actionTypes/eventActionType'
+import {CREATE_EVENT, VIEW_EVENT, VIEW_ALL_EVENTS, REGISTER_EVENT} from '../actionTypes/eventActionType'
 
 const initialState = {events: [], event: {}, loading: false, error: false, errorMessage: null}
 
@@ -30,6 +30,15 @@ const eventReducer = (state=initialState, action) => {
       return {...state, events: action.payload.events}
 
     case asyncActionName(VIEW_ALL_EVENTS).loading:
+      return {...state, loading: action.payload}
+
+    case asyncActionName(REGISTER_EVENT).failure:
+      return {...state, error: action.payload.status, errorMessage: action.payload.error}
+
+    case asyncActionName(REGISTER_EVENT).success:
+      return {...state, event: action.payload.event}
+
+    case asyncActionName(REGISTER_EVENT).loading:
       return {...state, loading: action.payload}
 
     default:
