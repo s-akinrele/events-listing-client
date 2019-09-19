@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux'
 
 import user from '../reducers/userReducer'
+import event from '../reducers/eventReducer'
 
 const rootReducer = combineReducers({
-  user
+  user,
+  event
 })
 
 export default rootReducer

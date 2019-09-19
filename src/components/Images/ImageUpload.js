@@ -12,7 +12,6 @@ const ImageUpload = props => {
   <div>
     <form>
       <input type="file" onChange={props.handleImageChange} />
-      <button type="submit" onClick={props.handleSubmit}>Upload Image</button>
     </form>
     {$imagePreview}
   </div>

@@ -8,7 +8,8 @@ import "react-datetime/css/react-datetime.css";
 
 import Header from '../../components/Header';
 import ImageUploader from '../../components/Images/ImageUpload';
-import {signOut} from '../../requests/userRequest'
+import {signOut} from '../../requests/userRequest';
+import {createEvent} from '../../requests/eventRequest';
 
 import '../../styles/_events-form.scss';
 
@@ -21,13 +22,10 @@ class CreateEventController extends Component {
       description: '',
       start_date: '',
       end_date: '',
-      image_url: '',
-      file: '',
-      imagePreviewUrl: ''
+      file: {}
     }
 
     this._handleImageChange = this._handleImageChange.bind(this);
-    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   handleStartDateChange = date => {
@@ -35,7 +33,7 @@ class CreateEventController extends Component {
   };
 
   handleEndDateChange = date => {
-    this.setState({end_date: date._id})
+    this.setState({end_date: date._d})
   }
 
   handleChange = (event) => {
@@ -46,12 +44,6 @@ class CreateEventController extends Component {
     this.setState({ [field]: value, validated: true })
   }
 
-  _handleSubmit(e) {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log(this.state, 'simi')
-  }
-
   _handleImageChange(e) {
     e.preventDefault();
 
@@ -59,13 +51,10 @@ class CreateEventController extends Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
+      this.setState({file: {src: reader.result, name: encodeURIComponent(file.name)}});
     }
 
-    reader.readAsDataURL(file)
+    if (file) reader.readAsDataURL(file)
   }
 
   onSignOut = () => {
@@ -74,8 +63,9 @@ class CreateEventController extends Component {
   }
 
   onSumbit = () => {
-    console.log(this.state)
+    this.props.createEvent(this.state)
   }
+
 
   render() {
     return (
@@ -104,7 +94,7 @@ class CreateEventController extends Component {
                 <ImageUploader
                   handleSubmit={this._handleSubmit}
                   handleImageChange={this._handleImageChange}
-                  imagePreviewUrl={this.state.imagePreviewUrl}
+                  imagePreviewUrl={this.state.file.src}
                 />
               </Form>
               <Button className="create-event-cta" onClick={this.onSumbit}>
@@ -119,4 +109,5 @@ class CreateEventController extends Component {
   }
 }
 
-export default connect(null, { signOut })(CreateEventController)
+const mapStateToProps = ({ event }) => ({...event})
+export default connect(mapStateToProps, { signOut, createEvent })(CreateEventController)

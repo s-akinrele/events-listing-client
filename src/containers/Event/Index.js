@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Header from '../../components/Header';
-import EventsJumbotron from '../../components/Jumbotron';
-import EventsLisiting from '../../components/EventsListing';
-import EventDetails from '../../components/EventDetails';
+import EventsJumbotron from '../../components/Events/Jumbotron';
+import EventsLisiting from '../../components/Events/EventsListing';
+import EventDetails from '../../components/Events/EventDetails';
 
 import { signOut } from '../../requests/userRequest'
 

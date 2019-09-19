@@ -4,3 +4,9 @@ export const authConstants = {
   SIGN_UP: `${BASE_URL}/signup`,
   LOG_IN: `${BASE_URL}/auth/login`
 }
+
+export const eventsConstant = {
+  CREATE_EVENT: `${BASE_URL}/events`
+}
+
+export const viewEventConstant = id => ({VIEW_EVENT: `${BASE_URL}/events/${id}`})
