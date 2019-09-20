@@ -64,7 +64,6 @@ class EventsPage extends Component {
     const {user} = this.props.user
     const {loading} = this.props
     let buttonText = loading ? <img src={loader} alt="loading..." /> : 'Attend';
-    console.log(this.state.registeredUser)
     return (
       <div>
         <Header onSignOut={this.onSignOut} />
