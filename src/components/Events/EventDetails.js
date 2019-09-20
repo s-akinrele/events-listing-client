@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import {isLoggedIn} from '../../helpers/AuthHelper'
 import '../../styles/_event-details.scss'
 
-const EventDetails = ({description, startDate, title, user, registerEvent, buttonText, loading}) => {
+const EventDetails = ({description, startDate, title, user, attendEvent, buttonText, loading, alreadyRegistered}) => {
   return (
     <div>
       <Container className="event-details">
@@ -24,13 +24,23 @@ const EventDetails = ({description, startDate, title, user, registerEvent, butto
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>
                   Find it interesting? Please click the Attend button to register for this event
-                  </Card.Text>
-                  <div className="attend-button">
+                </Card.Text>
+                  { alreadyRegistered ?
+                    <div className='notify-user'>
+                      You already registered for this event 
+                    </div>:
+                    <div className="attend-button">
                     {(isLoggedIn() || Object.entries(user).length) ?
-                      <Button className={classnames("attend-event-cta", {"disabled": loading})} onClick={registerEvent}>{buttonText}</Button> :
-                      <div>Please signup or login in to register for this event</div>
+                      <Button
+                        className={classnames("attend-event-cta", {"disabled": loading})}
+                        onClick={attendEvent}>{buttonText}
+                      </Button> :
+                      <div className='notify-user'>Please signup or login in to register for this event</div>
                     }
                   </div>
+                  }
+
+
               </Card.Body>
             </Card>
 

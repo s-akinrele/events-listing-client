@@ -18,7 +18,7 @@ const eventReducer = (state=initialState, action) => {
       return {...state, error: action.payload.status, errorMessage: action.payload.error}
 
     case asyncActionName(VIEW_EVENT).success:
-      return {...state, event: action.payload.event}
+      return {...state, event: action.payload}
 
     case asyncActionName(VIEW_EVENT).loading:
       return {...state, loading: action.payload}
@@ -36,7 +36,7 @@ const eventReducer = (state=initialState, action) => {
       return {...state, error: action.payload.status, errorMessage: action.payload.error}
 
     case asyncActionName(REGISTER_EVENT).success:
-      return {...state, event: action.payload.event}
+      return {...state, event: action.payload}
 
     case asyncActionName(REGISTER_EVENT).loading:
       return {...state, loading: action.payload}
