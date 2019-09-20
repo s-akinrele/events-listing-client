@@ -9,7 +9,7 @@ import EventAttendees from '../../components/Events/EventAttendees';
 
 import { signOut } from '../../requests/userRequest'
 import {viewEvent, registerForEvent} from '../../requests/eventRequest'
-import {currentUser} from '../../helpers/AuthHelper'
+import {currentUser, isLoggedIn} from '../../helpers/AuthHelper'
 import loader from '../../images/loader.gif';
 
 import '../../styles/homePageController.scss'
@@ -54,7 +54,7 @@ class ViewEventController extends Component {
 
   static alreadyRegistered = (props) => {
     const {user} = props.user
-    const currentUserId = currentUser(user).id
+    const currentUserId = isLoggedIn() && currentUser(user).id
     const foundUser = props.event.users && props.event.users.find((registeredUser) => registeredUser.id === currentUserId)
     return !!foundUser
   }

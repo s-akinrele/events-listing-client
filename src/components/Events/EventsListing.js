@@ -8,7 +8,7 @@ const EventsLisiting = ({events = []}) => {
     return (
       <Container>
         <Row>
-          <div>
+          <div className="events-header">
             <h2>Events</h2>
             <p>Adventures by region See what's happening around you </p>
           </div>
