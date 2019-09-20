@@ -27,7 +27,7 @@ const EventsLisiting = ({events = []}) => {
                         </Card.Text>
                         <Card.Link href="#">
                           <div className="attend-button">
-                            <p className="number-of-attendes">500 attendes</p>
+                            <p className="number-of-attendes">{event.attendees_count} attendee(s)</p>
                             <Button>More</Button>
                           </div>
                         </Card.Link>

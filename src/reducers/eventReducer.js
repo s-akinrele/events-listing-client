@@ -27,7 +27,7 @@ const eventReducer = (state=initialState, action) => {
       return {...state, error: action.payload.status, errorMessage: action.payload.error}
 
     case asyncActionName(VIEW_ALL_EVENTS).success:
-      return {...state, events: action.payload.events}
+      return {...state, events: action.payload}
 
     case asyncActionName(VIEW_ALL_EVENTS).loading:
       return {...state, loading: action.payload}

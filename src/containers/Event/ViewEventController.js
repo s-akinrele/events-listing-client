@@ -34,8 +34,9 @@ class EventsPage extends Component {
   }
 
   render() {
-    const {name, start_date, image_url, description, loading} = this.props.event
+    const {name, start_date, image_url, description} = this.props.event
     const {user} = this.props.user
+    const {loading} = this.props
     let buttonText = loading ? <img src={loader} alt="loading..." /> : 'Attend';
     return (
       <div>
