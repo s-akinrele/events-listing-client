@@ -4,7 +4,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 const EventAttendees = ({users=[]}) => {
   return (
     <Container>
-      <h3>Attendees</h3>
+      {users.length !== 0 && <h3>Attendees</h3>}
       <Row>
         {users.map(user => {
           return (

@@ -8,7 +8,6 @@ import {createLogger} from 'redux-logger';
 import rootReducer from './reducers';
 
 import PrivateRoute from './components/Auth/PrivateRoute'
-import HomePageController from './containers/HomePage/HomePageController';
 import CreateEventController from './containers/Event/CreateEventController';
 import ViewEventController from './containers/Event/ViewEventController';
 import EventsPage from './containers/Event/EventsPage';
