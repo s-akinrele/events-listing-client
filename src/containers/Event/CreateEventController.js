@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Container, Row, Button , Form, Alert} from 'react-bootstrap';
 import classnames from 'classnames'
+import validate from 'validate.js';
+import moment from 'moment'
 
 import Datetime from "react-datetime"
 import "react-datetime/css/react-datetime.css";
@@ -20,11 +22,12 @@ class CreateEventController extends Component {
     super() 
 
     this.state = {
-      name: '',
-      description: '',
+      name: null,
+      description: null,
       start_date: '',
       end_date: '',
-      file: {}
+      file: {},
+      errors: ''
     }
 
     this._handleImageChange = this._handleImageChange.bind(this);
@@ -37,11 +40,11 @@ class CreateEventController extends Component {
   }
 
   handleStartDateChange = date => {
-    this.setState({start_date: date._d})
+    this.setState({start_date: date._d, errors: ''})
   };
 
   handleEndDateChange = date => {
-    this.setState({end_date: date._d})
+    this.setState({end_date: date._d, errors: ''})
   }
 
   handleChange = (event) => {
@@ -49,7 +52,7 @@ class CreateEventController extends Component {
     const field = event.target.name;
     const value = event.target.value;
     form.checkValidity()
-    this.setState({ [field]: value, validated: true })
+    this.setState({ [field]: value, validated: true, errors: '' })
   }
 
   _handleImageChange(e) {
@@ -58,11 +61,23 @@ class CreateEventController extends Component {
     let reader = new FileReader();
     let file = e.target.files[0];
 
-    reader.onloadend = () => {
-      this.setState({file: {src: reader.result, name: encodeURIComponent(file.name)}});
+    if ((file.size / 1000000) <= 2) {
+      reader.onloadend = () => {
+        this.setState({
+          file: {
+          src: reader.result,
+          name: encodeURIComponent(file.name.split('.')[0])
+        },
+          fileError: ''
+      });
+      }
+      reader.readAsDataURL(file) 
+    } else {
+      this.setState({
+        file: {},
+        errors: 'File is too large only files not greater than 2MB is allowed'
+      })
     }
-
-    if (file) reader.readAsDataURL(file)
   }
 
   onSignOut = () => {
@@ -70,20 +85,63 @@ class CreateEventController extends Component {
     this.props.history.push('/');
   }
 
-  onSumbit = () => {
-    this.props.createEvent(this.state)
+  error = (errors) => {
+    if (errors instanceof Error) {
+      // This means an exception was thrown from a validator
+      console.err("An error ocurred", errors);
+    } else {
+      this.setState({errors: Object.values(errors).flat().join('|')});
+    }
   }
+
+  validateForm = () => {
+    validate.extend(validate.validators.datetime, {
+      // The value is guaranteed not to be null or undefined but otherwise it
+      // could be anything.
+      parse: function(value, options) {
+        return +moment.utc(value);
+      },
+      // Input is a unix timestamp
+      format: function(value, options) {
+        var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+        return moment.utc(value).format(format);
+      }
+    });
+    
+    const constraints = {
+      name: {presence: true},
+      description: {presence: true},
+      start_date: {
+        presence: true,
+        datetime: {
+          dateOnly: false,
+          earliest: moment.utc().toISOString()
+        }
+      },
+      end_date: {
+        presence: true,
+        datetime: {
+          dateOnly: false,
+          earliest: moment.utc().toISOString()
+        }
+      },
+  };
+    validate.async(this.state, constraints).then(this.onSumbit, this.error);
+  }
+
+  onSumbit = () => { this.props.createEvent(this.state) }
 
 
   render() {
     const {errorMessage, loading} = this.props.event
+    const {errors} = this.state
     let buttonText = loading ? <img src={loader} alt="loading..." /> : 'Create Event';
     return (
       <div>
         <Header onSignOut={this.onSignOut} />
         <div className="create-event-controller">
           <Container>
-            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+            {(errorMessage || errors) && <Alert variant='danger'>{(errorMessage || errors)}</Alert>}
             <Row>
               <Form>
                 <Form.Group controlId="eventName">
@@ -108,7 +166,7 @@ class CreateEventController extends Component {
                   imagePreviewUrl={this.state.file.src}
                 />
               </Form>
-              <Button className={classnames("create-event-cta", {"disabled": loading})} onClick={this.onSumbit}>
+              <Button className={classnames("create-event-cta", {"disabled": loading})} onClick={this.validateForm}>
                 {buttonText}
               </Button>
             </Row>

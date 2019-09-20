@@ -9,6 +9,7 @@ import EventDetails from '../../components/Events/EventDetails';
 import { signOut } from '../../requests/userRequest'
 import {viewEvent, registerForEvent} from '../../requests/eventRequest'
 import {currentUser} from '../../helpers/AuthHelper'
+import loader from '../../images/loader.gif';
 
 import '../../styles/homePageController.scss'
 
@@ -33,8 +34,9 @@ class EventsPage extends Component {
   }
 
   render() {
-    const {name, start_date, image_url, description} = this.props.event
+    const {name, start_date, image_url, description, loading} = this.props.event
     const {user} = this.props.user
+    let buttonText = loading ? <img src={loader} alt="loading..." /> : 'Attend';
     return (
       <div>
         <Header onSignOut={this.onSignOut} />
@@ -49,6 +51,8 @@ class EventsPage extends Component {
           title={name}
           user={user}
           registerEvent={this.registerEvent}
+          buttonText={buttonText}
+          loading={loading}
         />
       </div>
     )

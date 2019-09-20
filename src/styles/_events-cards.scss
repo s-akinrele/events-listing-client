@@ -8,6 +8,7 @@
   
     .events-date {
       color: #00a2c7;
+      font-size: 14px;
       text-transform: uppercase;
       font-weight: bold;
     }
@@ -15,6 +16,7 @@
     .card-title {
       color: black;
       font-weight: bold;
+      text-transform: capitalize;
     }
   
     .card-text {
@@ -36,10 +38,15 @@
     align-items: center;
 
     button {
-      justify-content: flex-end;
-      background-color: transparent;
-      color: #00a2c7;
-      border: 1px solid  #00a2c7;
+        height: 35px;
+        display: flex;
+        background-color: white;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #00a2c7;
+        color: #00a2c7;
+        font-weight: bold;
+        border-radius: 5px;
     }
   }
 }

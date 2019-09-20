@@ -1,12 +1,14 @@
 import React from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
-import '../../styles/_events-cards.scss';
-import {isLoggedIn} from '../../helpers/AuthHelper'
+import classnames from 'classnames'
 
-const EventDetails = ({description, startDate, title, user, registerEvent}) => {
+import {isLoggedIn} from '../../helpers/AuthHelper'
+import '../../styles/_event-details.scss'
+
+const EventDetails = ({description, startDate, title, user, registerEvent, buttonText, loading}) => {
   return (
     <div>
-      <Container>
+      <Container className="event-details">
         <Row>
           <Col xs={12} md={8}>
             <h2>Event Details</h2>
@@ -25,7 +27,7 @@ const EventDetails = ({description, startDate, title, user, registerEvent}) => {
                   </Card.Text>
                   <div className="attend-button">
                     {(isLoggedIn() || Object.entries(user).length) ?
-                      <Button onClick={registerEvent}>Attend</Button> :
+                      <Button className={classnames("attend-event-cta", {"disabled": loading})} onClick={registerEvent}>{buttonText}</Button> :
                       <div>Please signup or login in to register for this event</div>
                     }
                   </div>

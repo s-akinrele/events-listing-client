@@ -20,7 +20,7 @@ const EventsLisiting = ({events = []}) => {
                   <Link className="events-card-wrapper" to={`/events/${event.id}`}>
                     <Card className="events-card">
                       <Card.Body>
-                        <p className="events-date">{moment(event.start_date).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
+                        <p className="events-date">{moment(event.start_date).format("ddd, MMM DD, h:mm a")}</p>
                         <Card.Title>{event.name}</Card.Title>
                         <Card.Text>
                           {event.description}
@@ -28,7 +28,7 @@ const EventsLisiting = ({events = []}) => {
                         <Card.Link href="#">
                           <div className="attend-button">
                             <p className="number-of-attendes">500 attendes</p>
-                            <Button >View More</Button>
+                            <Button>More</Button>
                           </div>
                         </Card.Link>
                       </Card.Body>
