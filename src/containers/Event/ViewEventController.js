@@ -14,7 +14,7 @@ import loader from '../../images/loader.gif';
 
 import '../../styles/homePageController.scss'
 
-class EventsPage extends Component {
+class ViewEventController extends Component {
   constructor() {
     super()
 
@@ -36,7 +36,7 @@ class EventsPage extends Component {
   static getDerivedStateFromProps(nextProps) {
     const {event, loading} = nextProps
     if (!loading && Object.entries(event).length) {
-      return {registeredUser: EventsPage.alreadyRegistered(nextProps)}
+      return {registeredUser: ViewEventController.alreadyRegistered(nextProps)}
     }
 
     return null
@@ -91,4 +91,4 @@ class EventsPage extends Component {
 
 const mapStateToProps = ({ event, user }) => ({ ...event, user })
 
-export default connect(mapStateToProps, { signOut, viewEvent, registerForEvent })(EventsPage)
+export default connect(mapStateToProps, { signOut, viewEvent, registerForEvent })(ViewEventController)
